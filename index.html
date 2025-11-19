@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Prime Imóveis - Portal de Imóveis</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- LOGO E NOME DA EMPRESA -->
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="logoaplha.png" alt="">
+                    </div>
+                    <div class="company-info">
+                        <h1 class="company-name">Alpha Prime</h1>
+                        <p class="company-tagline">Imóveis Premium</p>
+                    </div>
+                </div>
+
+                <!-- NAVEGAÇÃO -->
+                <nav class="nav">
+                    <button class="nav-btn active" data-page="home">Home</button>
+                    <button class="nav-btn" data-page="listings">Imóveis</button>
+                    <button class="nav-btn" data-page="favoritos">Favoritos</button>
+                    <button class="nav-btn" data-page="contato">Contato</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+        <!-- PÁGINA HOME -->
+        <section id="home" class="page active hero-section">
+            <div class="hero-video-container">
+                <video class="hero-video" autoplay muted loop>
+                    <source src="videocasadeluxoconverter.mp4" type="video/mp4">
+                    Seu navegador não suporta vídeo HTML5
+                </video>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h2>Encontre seu Imóvel Ideal</h2>
+                    <p>Explore as melhores propriedades premium com a Alpha Prime</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="goToListings('Venda')">Comprar Imóvel</button>
+                        <button class="btn btn-secondary" onclick="goToListings('Aluguel')">Alugar Imóvel</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA LISTAGEM -->
+        <section id="listings" class="page">
+            <div class="container">
+                <!-- FILTROS -->
+                <div class="filters-section">
+                    <h2>Buscar Imóveis</h2>
+                    
+                    <div class="search-bar">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Buscar por localização ou título..."
+                            onkeyup="filterListings()"
+                        >
+                    </div>
+
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label>Tipo de Transação:</label>
+                            <select id="transactionFilter" onchange="filterListings()">
+                                <option value="">Todos</option>
+                                <option value="Venda">Venda</option>
+                                <option value="Aluguel">Aluguel</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Tipo de Imóvel:</label>
+                            <select id="propertyTypeFilter" onchange="filterListings()">
+                                <option value="">Todos</option>
+                                <option value="Apartamento">Apartamento</option>
+                                <option value="Casa">Casa</option>
+                                <option value="Comercial">Comercial</option>
+                                <option value="Lote">Lote</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Preço Mínimo:</label>
+                            <input 
+                                type="number" 
+                                id="minPriceFilter" 
+                                placeholder="0"
+                                onchange="filterListings()"
+                            >
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Preço Máximo:</label>
+                            <input 
+                                type="number" 
+                                id="maxPriceFilter" 
+                                placeholder="999999999"
+                                onchange="filterListings()"
+                            >
+                        </div>
+
+                        <div class="filter-group">
+                            <label>Ordenar por:</label>
+                            <select id="sortFilter" onchange="filterListings()">
+                                <option value="newest">Mais Recente</option>
+                                <option value="price-asc">Preço (Crescente)</option>
+                                <option value="price-desc">Preço (Decrescente)</option>
+                            </select>
+                        </div>
+
+                        <button class="btn btn-small" onclick="resetFilters()">Limpar Filtros</button>
+                    </div>
+                </div>
+
+                <!-- LISTAGEM DE IMÓVEIS -->
+                <div id="listingsContainer" class="listings-grid">
+                    <!-- Imóveis serão inseridos aqui via JavaScript -->
+                </div>
+
+                <!-- MENSAGEM VAZIA -->
+                <div id="emptyMessage" class="empty-message" style="display: none;">
+                    <p>Nenhum imóvel encontrado com os filtros selecionados</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA FAVORITOS -->
+        <section id="favoritos" class="page">
+            <div class="container">
+                <h2>Meus Favoritos</h2>
+                <div id="favoritesContainer" class="listings-grid">
+                    <!-- Favoritos serão inseridos aqui via JavaScript -->
+                </div>
+                <div id="emptyFavorites" class="empty-message" style="display: none;">
+                    <p>Você ainda não tem favoritos. Volte para a listagem e clique no coração para adicionar!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PÁGINA CONTATO -->
+        <section id="contato" class="page">
+            <div class="container">
+                <div class="contact-section">
+                    <h2>Entre em Contato</h2>
+                    <p class="contact-intro">Tem dúvidas? Fale conosco! Estamos aqui para ajudar.</p>
+
+                    <div class="contact-content">
+                        <div class="contact-info">
+                            <div class="contact-card">
+                                <h3>📞 Telefone</h3>
+                                <p><a href="tel:+5511999999999">(11) 99999-9999</a></p>
+                            </div>
+                            <div class="contact-card">
+                                <h3>📧 Email</h3>
+                                <p><a href="mailto:contato@alphaprime.com">contato@alphaprime.com</a></p>
+                            </div>
+                            <div class="contact-card">
+                                <h3>📍 Endereço</h3>
+                                <p>Av. Paulista, 1000<br>São Paulo - SP</p>
+                            </div>
+                            <div class="contact-card">
+                                <h3>🕐 Horário</h3>
+                                <p>Seg-Sex: 9h às 18h<br>Sábado: 9h às 13h</p>
+                            </div>
+                        </div>
+
+                        <form class="contact-form">
+                            <div class="form-group">
+                                <label for="name">Nome:</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Telefone:</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Mensagem:</label>
+                                <textarea id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DETALHES DO IMÓVEL -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody" class="modal-body">
+                <!-- Conteúdo do imóvel será inserido aqui -->
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Alpha Prime Imóveis</h4>
+                    <p>Sua melhor escolha em imóveis premium</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Links Rápidos</h4>
+                    <ul>
+                        <li><a href="#" onclick="goToPage('listings')">Imóveis</a></li>
+                        <li><a href="#" onclick="goToPage('favoritos')">Favoritos</a></li>
+                        <li><a href="#" onclick="goToPage('contato')">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Redes Sociais</h4>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">f</a>
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="WhatsApp">💬</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Alpha Prime Imóveis. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
