@@ -6,6 +6,19 @@
 }
 
 :root {
+    --primary-color: #636363;
+    --secondary-color: #636363;
+    --accent-color: #00d4ff;
+    --text-color: #333;
+    --light-text: #666;
+    --border-color: #ddd;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --bg-light: #f5f5f5;
+    --bg-white: #ffffff;
+}
+
+/* :root {
     --primary-color: #0066cc;
     --secondary-color: #00a8e8;
     --accent-color: #00d4ff;
@@ -16,7 +29,7 @@
     --danger-color: #dc3545;
     --bg-light: #f5f5f5;
     --bg-white: #ffffff;
-}
+} */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
